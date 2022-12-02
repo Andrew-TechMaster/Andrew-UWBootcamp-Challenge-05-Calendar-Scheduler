@@ -1,3 +1,18 @@
+/* {============================= Universal Styles =============================} */
+:root {
+  --primary-color: black;
+  --secondary-color: white;
+  --tertiary-color: lightcoral;
+  --quaternary-color: grey;
+}
+
+/* set content highlight color and background */
+::selection {
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
+}
+
+/* {============================= Element Selectors =============================} */
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
@@ -12,6 +27,7 @@ textarea {
   padding: 10px;
 }
 
+/* {============================= Class Selectors =============================} */
 .description {
   white-space: pre-wrap;
 }
