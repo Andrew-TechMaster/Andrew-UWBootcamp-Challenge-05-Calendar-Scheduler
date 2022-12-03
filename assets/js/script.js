@@ -3,16 +3,48 @@
 // in the html.
 $(function () {
   /* {============================= DOM / Element / Variable Declaration  =============================} */
-  var timeBlockListEl = $("time-block")
+  var displayedCurrentTime = $("#currentDay");
+  var timeBlockListEl = $(".time-block");
+  // var textInput = $(".description").val();
 
   /* {============================= Functions (callback) =============================} */
+  function pushData() {
+    // var key = $(this).siblings(".hour").text();
+    // var value = $(this).siblings(".description").val();
+    // localStorage.setItem(key, value);
+  };
+
+  /* {============================= Add Event Listener  =============================} */
   // TODO: Add a listener for click events on the save button.
+  timeBlockListEl.on("click", ".saveBtn", function (evt) {
+    evt.preventDefault();
+
+    var key = $(this).siblings(".hour").text();
+    var value = $(this).siblings(".description").val();
+    localStorage.setItem(key, value);
+
+    // pushData();
+
+    // console.log("------inside event listener------");
+    // console.log(evt.target);
+    // console.log($(evt.target).parent());
+    // console.log($(this));
+    // console.log($(this).siblings(".description").val());
+    // console.log($(this).siblings(".hour").text());
+    // console.log(typeof($(this).siblings(".description").val()));
+    // console.log(typeof($(this).siblings(".hour").text()));
+  });
 
   // TODO: Add code to apply the past, present, or future class to each time block by comparing the id to the current hour.
 
   // TODO: Add code to get any user input that was saved in localStorage and set the values of the corresponding textarea elements.
 
-  /* {============================= Add Event Listener  =============================} */
+  // TODO: Add code to display the current date in the header of the page.
+  displayedCurrentTime.text(dayjs().format('dddd, MMMM DD, YYYY'));
+
+  /* {============================= Testing / Logging  =============================} */
+  console.log("~~~~~~~~~~~~~Refresh Start~~~~~~~~~~~~~");
+  // console.log(timeBlockListEl);
 
 });
 
