@@ -6,6 +6,8 @@ $(function () {
   var displayedCurrentTime = $("#currentDay");
   var timeBlockListEl = $(".time-block");
   // var textInput = $(".description").val();
+  var hourListEl = $(".hour");
+  var textBlockListEl = $(".description");
 
   /* {============================= Functions (callback) =============================} */
   function pushData() {
@@ -13,6 +15,44 @@ $(function () {
     // var value = $(this).siblings(".description").val();
     // localStorage.setItem(key, value);
   };
+
+  function renderData() {
+    hourListEl.each(function () {
+      var keyName = $(this).text();
+      var remoteValue = localStorage.getItem(keyName);
+      if (remoteValue) {
+        $(this).siblings(".description").val(remoteValue);
+      }
+    })
+  }
+
+  // function renderData2() {
+  //   timeBlockListEl.each(function() {
+  //     var keyName = $(this).children().eq(0).text();
+  //     var remoteValue = localStorage.getItem(keyName)
+  //     if (remoteValue) {
+  //       $(this).children(".description").val(remoteValue);
+  //     }
+  //   })
+  // }
+
+  function timeBlcokDisplay() {
+    var currentHour = dayjs().hour();
+    timeBlockListEl.each(function () {
+      var hourBlockStr = $(this).attr("id").split("-")[1];
+      var hourBlockNum = parseInt(hourBlockStr);
+
+      if (currentHour === hourBlockNum) {
+        // present
+      } else if (currentHour > hourBlockNum) {
+        // past
+      } else {
+        // future
+      }
+
+      console.log(hourBlockNum);
+    })
+  }
 
   /* {============================= Add Event Listener  =============================} */
   // TODO: Add a listener for click events on the save button.
@@ -36,8 +76,11 @@ $(function () {
   });
 
   // TODO: Add code to apply the past, present, or future class to each time block by comparing the id to the current hour.
+  timeBlcokDisplay()
 
   // TODO: Add code to get any user input that was saved in localStorage and set the values of the corresponding textarea elements.
+  renderData();
+  // renderData2();
 
   // TODO: Add code to display the current date in the header of the page.
   displayedCurrentTime.text(dayjs().format('dddd, MMMM DD, YYYY'));
