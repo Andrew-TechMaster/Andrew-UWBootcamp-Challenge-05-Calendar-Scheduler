@@ -7,7 +7,7 @@ $(function () {
   var timeBlockListEl = $(".time-block");
   // var textInput = $(".description").val();
   var hourListEl = $(".hour");
-  var textBlockListEl = $(".description");
+  // var textBlockListEl = $(".description");
 
   /* {============================= Functions (callback) =============================} */
   function pushData() {
@@ -36,20 +36,27 @@ $(function () {
   //   })
   // }
 
-  function timeBlcokDisplay() {
+  function timeBlcokDisplayColor() {
     var currentHour = dayjs().hour();
     timeBlockListEl.each(function () {
       var hourBlockStr = $(this).attr("id").split("-")[1];
       var hourBlockNum = parseInt(hourBlockStr);
 
-      if (currentHour === hourBlockNum) {
+      if (hourBlockNum === currentHour) {
         // present
-      } else if (currentHour > hourBlockNum) {
+        // $(this).addClass("present");
+        $(this).toggleClass("present");
+      } else if (hourBlockNum < currentHour) {
         // past
+        // $(this).addClass("past");
+        $(this).toggleClass("past");
       } else {
         // future
+        // $(this).addClass("future");
+        $(this).toggleClass("future");
       }
 
+      console.log(`Current: ${currentHour}`);
       console.log(hourBlockNum);
     })
   }
@@ -66,9 +73,10 @@ $(function () {
     // pushData();
 
     // console.log("------inside event listener------");
-    // console.log(evt.target);
+    console.log(evt.target);
     // console.log($(evt.target).parent());
-    // console.log($(this));
+    console.log("---up: evt.terget vs this---");
+    console.log($(this));
     // console.log($(this).siblings(".description").val());
     // console.log($(this).siblings(".hour").text());
     // console.log(typeof($(this).siblings(".description").val()));
@@ -76,14 +84,17 @@ $(function () {
   });
 
   // TODO: Add code to apply the past, present, or future class to each time block by comparing the id to the current hour.
-  timeBlcokDisplay()
+  timeBlcokDisplayColor()
 
   // TODO: Add code to get any user input that was saved in localStorage and set the values of the corresponding textarea elements.
   renderData();
   // renderData2();
 
   // TODO: Add code to display the current date in the header of the page.
-  displayedCurrentTime.text(dayjs().format('dddd, MMMM DD, YYYY'));
+  setInterval(()=>{
+    var dateTime = dayjs();
+    displayedCurrentTime.text(dateTime.format('dddd, MMMM DD, h:mm:ss , YYYY'))}, 1000)
+  // displayedCurrentTime.text(dayjs().format('ss dddd, MMMM DD, YYYY'));
 
   /* {============================= Testing / Logging  =============================} */
   console.log("~~~~~~~~~~~~~Refresh Start~~~~~~~~~~~~~");
