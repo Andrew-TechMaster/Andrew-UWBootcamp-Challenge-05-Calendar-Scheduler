@@ -28,20 +28,20 @@ $(function () {
 
       if (hourBlockNum === currentHour) {
         // present
-        // $(this).addClass("present");
-        $(this).toggleClass("present");
+        $(this).addClass("present");
+        // $(this).toggleClass("present");
       } else if (hourBlockNum < currentHour) {
         // past
-        // $(this).addClass("past");
-        $(this).toggleClass("past");
+        $(this).addClass("past");
+        // $(this).toggleClass("past");
       } else {
         // future
-        // $(this).addClass("future");
-        $(this).toggleClass("future");
+        $(this).addClass("future");
+        // $(this).toggleClass("future");
       }
 
-      console.log(`Current: ${currentHour}`);
-      console.log(hourBlockNum);
+      // console.log(`Current: ${currentHour}`);
+      // console.log(hourBlockNum);
     })
   }
 
@@ -52,21 +52,31 @@ $(function () {
 
     var key = $(this).siblings(".hour").text();
     var value = $(this).siblings(".description").val();
-    localStorage.setItem(key, value);
+    // localStorage.setItem(key, value);
+    var errorMessage = "Text area cannot be empty. Please type somthing... \nOr use the delete button to clear all text";
+    /*
+     If the input is empty -> alert error message
+     If sth in the text field -> save the data in the remote local storage {[key: xAPM]: [value: input.val()]}
+    */
+    ((typeof value === 'string' && value.trim().length === 0) ? window.alert(errorMessage) : localStorage.setItem(key, value));
+
+
 
     // pushData();
 
     // console.log("------inside event listener------");
-    console.log(evt.target);
+    // console.log(evt.target);
     // console.log($(evt.target).parent());
-    console.log("---up: evt.terget vs this---");
-    console.log($(this));
+    // console.log("---up: evt.terget vs this---");
+    // console.log($(this));
     // console.log($(this).siblings(".description").val());
     // console.log($(this).siblings(".hour").text());
     // console.log(typeof($(this).siblings(".description").val()));
     // console.log(typeof($(this).siblings(".hour").text()));
+    // console.log(value);
   });
 
+  /* [--------- For deleting local storage data and then display empty in the textarea ---------] */
   timeBlockListEl.on("click", ".btn-danger", function (evt) {
     evt.preventDefault();
 
@@ -77,13 +87,17 @@ $(function () {
 
 
   /* {============================= Calling functions  =============================} */
-  // TODO: Add code to apply the past, present, or future class to each time block by comparing the id to the current hour.
-  timeBlcokDisplayColor()
+  /* [--------- Add code to apply the past, present, or future class to each time block by comparing the id to the current hour. ---------] */
+  // Call for the first time dispaly
+  timeBlcokDisplayColor();
+  setInterval(function () {
+    timeBlcokDisplayColor();
+  }, 1000 * 60 * 30);
 
-  // TODO: Add code to get any user input that was saved in localStorage and set the values of the corresponding textarea elements.
+  /* [--------- Add code to get any user input that was saved in localStorage and set the values of the corresponding textarea elements. ---------] */
   renderData();
 
-  // TODO: Add code to display the current date in the header of the page.
+  /* [--------- Add code to display the current date in the header of the page. ---------] */
   setInterval(() => {
     var dateTime = dayjs();
     displayedCurrentTime.text(dateTime.format('dddd, MMMM DD, h:mm:ss , YYYY'))
@@ -116,6 +130,29 @@ $(function () {
 // attribute of each time-block be used to do this?
 //
 // TODO: Add code to display the current date in the header of the page.
+
+
+  // /* [--------- Temp ---------] */
+  // var insetHtmlArray = [];
+
+  // for (let index = 7; index < 10; index++) {
+  //   insetHtmlArray.push(`
+  //   <div id="hour-${index + 12}" class="row time-block">
+  //     <div class="col-2 col-md-1 hour text-center py-3">${index}PM</div>
+  //     <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+  //     <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+  //       <i class="fas fa-save" aria-hidden="true"></i>
+  //     </button>
+  //   </div>`)
+  // };
+
+  // // console.log(insetHtmlArray);
+  // insetHtmlArray.forEach((item) => {
+  //   mainSection.append(item);
+  // });
+  // // very important, not define again will...
+  // var timeBlockListEl = $(".time-block");
+
 
 /* 
 $(function() {
@@ -158,7 +195,7 @@ function createRow() {
 
 /*
 var insetHtmlArray = [];
-for (let index = 5; index < 9; index++) {
+for (let index = 0; index < 5; index++) {
   insetHtmlArray.push(`
     <div id="hour-${index}" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">${index}</div>
