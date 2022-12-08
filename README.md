@@ -22,27 +22,14 @@ https://andrew-techmaster.github.io/Andrew-UWBootcamp-Challenge-05-Calendar-Sche
 
 |![screentshot01](./assets/images/sc01.png)|
 |:--:| 
-| *Click start to begin the quiz* |
+| *Display Real Time* |
 
 |![screentshot02](./assets/images/sc02.png)|
 |:--:| 
-| *Demo for one of the question* |
+| *Error Message If No Input With Save Button* |
 
 |![screentshot02](./assets/images/sc03.png)|
 |:--:| 
-| *Click "View High Score" button to diplay the rusult* |
-
-### The following shows some of the application:
-|![screentshot03](./assets/images/feature01.png)|
-|:--:| 
-| *When user select incorrect answer* |
-
-|![screentshot04](./assets/images/feature02.png)|
-|:--:| 
-| *When user select right answer* |
-
-|![screentshot05](./assets/images/feature03.png)|
-|:--:| 
-|*When users finish the quiz before time is up*|
+| *Grey: Past & Red: Current & Green: Future* |
 - - -
 © 2022 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
